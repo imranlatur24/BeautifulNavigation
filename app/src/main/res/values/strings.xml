@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ArmaLoft</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alert_logout">Do you want to logout?</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="spinner_title">Select Sci. Type</string>
+    <string name="login">Login</string>
+</resources>
