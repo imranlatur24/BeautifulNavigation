@@ -48,7 +48,7 @@ public class Adapter_Library extends RecyclerView.Adapter {
             image = (ImageView) itemView.findViewById(R.id.image);
             itemView.setOnClickListener(this);
         }
-    public  void bindView(int position){
+    public void bindView(int position){
             name.setText(OutData.title[position]);
             image.setImageResource(OutData.picturepath[position]);
     }

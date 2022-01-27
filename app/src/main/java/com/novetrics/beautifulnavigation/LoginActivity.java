@@ -49,9 +49,9 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
     }
 
     private void init() {
-        if(!checkPermission()){
-            requestPermission();
-        }
+//        if(!checkPermission()){
+//            requestPermission();
+//        }
         etemail = findViewById(R.id.etemail);
         edt_mypass = findViewById(R.id.edt_mypass);
         btnlogin = findViewById(R.id.btnlogin);
@@ -79,7 +79,7 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
             public void onResponse(Call<MainModel> call, Response<MainModel> response) {
                 progressDialog.dismiss();
                 try {
-                System.out.println(TAG+ "# Response "+response.body().getMessage());
+//                System.out.println(TAG+ "# Response "+response.body().getMessage());
 //                System.out.println(TAG+ "# empid "+response.body().getEmployee_details().get(0).getFirst_name());
                 if (200 == 200) {
 //                    Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_LONG).show();
