@@ -21,6 +21,18 @@
             android:layout_height="60dp">
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:layout_marginTop="60dp"
+        android:id="@+id/simpleTabLayout"
+        android:layout_below="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabBackground="@android:color/darker_gray"
+        app:tabIndicatorColor="#f00"
+        app:tabSelectedTextColor="#f00"
+        app:tabTextColor="#000" />
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

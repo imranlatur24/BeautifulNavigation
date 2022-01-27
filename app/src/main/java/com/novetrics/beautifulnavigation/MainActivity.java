@@ -17,12 +17,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.novetrics.beautifulnavigation.fragments.ChangePasswordFragment;
 import com.novetrics.beautifulnavigation.fragments.ContactusFragment;
 import com.novetrics.beautifulnavigation.fragments.DashboardFragment;
+import com.novetrics.beautifulnavigation.fragments.GalleryFragment;
+import com.novetrics.beautifulnavigation.fragments.LibraryFragment;
+import com.novetrics.beautifulnavigation.fragments.MemberFragment;
 import com.novetrics.beautifulnavigation.fragments.NotificationFragment;
 import com.novetrics.beautifulnavigation.fragments.ProfileFragment;
 
@@ -32,6 +37,9 @@ public class MainActivity extends BaseActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     String firstname;
+    TabLayout tabLayout;
+    FrameLayout simpleFrameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +56,55 @@ public class MainActivity extends BaseActivity {
         prefManager.closeDB();
         Toast.makeText(MainActivity.this, "welcome : "+firstname, Toast.LENGTH_SHORT).show();
 
-        // Logic to load the starting destination when the activity is first created.
-        if (savedInstanceState == null) {
+
+
+        // get the reference of FrameLayout and TabLayout
+        simpleFrameLayout = (FrameLayout) findViewById(R.id.frame);
+        tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
+        title_tabs();
+        if (savedInstanceState == null)
+        {
             FragmentManager fragmentManager=getSupportFragmentManager();
             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.frame,new DashboardFragment()).commit();
         }
+        // perform setOnTabSelectedListener event on TabLayout
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+// get the current selected tab's position and replace the fragment accordingly
+                Fragment fragment = null;
+                switch (tab.getPosition()) {
+                    case 0:
+                        fragment = new DashboardFragment();
+                        loadFragment(fragment);
+                        break;
+                    case 1:
+                        fragment = new LibraryFragment();
+                        loadFragment(fragment);
+                        break;
+                    case 2:
+                        fragment = new GalleryFragment();
+                        loadFragment(fragment);
+                        break;
+        }
+        // Logic to load the starting destination when the activity is first created.
+//        if (savedInstanceState == null)
+//        {
+//            FragmentManager fragmentManager=getSupportFragmentManager();
+//            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+//            fragmentTransaction.add(R.id.frame,new DashboardFragment()).commit();
+//        }
+//        FragmentManager fm = getSupportFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.replace(R.id.frame, fragment);
+//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//        ft.commit();
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
         navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -63,8 +114,8 @@ public class MainActivity extends BaseActivity {
                 Fragment fragment=null;
                 switch (id)
                 {
-                    case R.id.dashboard:
-                        fragment=new DashboardFragment();
+                    case R.id.members:
+                        fragment=new MemberFragment();
                         loadFragment(fragment);
                         break;
                     case R.id.profile:
@@ -102,10 +153,41 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+   @Override
+   public void onTabUnselected(TabLayout.Tab tab) {
+   }
+
+   @Override
+   public void onTabReselected(TabLayout.Tab tab) {
+
+   }
+   });
+    }
+    // title tabs like home,libary and gallery
+    private void title_tabs() {
+        // Create a new Tab named "First"
+        TabLayout.Tab firstTab = tabLayout.newTab();
+        firstTab.setText("HOme"); // set the Text for the first Tab
+        firstTab.setIcon(R.drawable.ic_baseline_home_24); // set an icon for the
+// first tab
+        tabLayout.addTab(firstTab); // add  the tab at in the TabLayout
+// Create a new Tab named "Second"
+        TabLayout.Tab secondTab = tabLayout.newTab();
+        secondTab.setText("Library"); // set the Text for the second Tab
+        secondTab.setIcon(R.drawable.ic_library_books); // set an icon for the second tab
+        tabLayout.addTab(secondTab); // add  the tab  in the TabLayout
+// Create a new Tab named "Third"
+        TabLayout.Tab thirdTab = tabLayout.newTab();
+        thirdTab.setText("Gallery"); // set the Text for the first Tab
+        thirdTab.setIcon(R.drawable.ic_gallery); // set an icon for the first tab
+        tabLayout.addTab(thirdTab); // add  the tab at in the TabLayout
+
+    }
+
     private void logout_dialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogBuilder.setTitle(R.string.app_name);
         alertDialogBuilder.setIcon(R.drawable.basket);
         alertDialogBuilder.setMessage(R.string.alert_logout);
