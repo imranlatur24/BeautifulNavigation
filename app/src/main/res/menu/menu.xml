@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:id="@+id/group1" android:checkableBehavior="single">
         <item
+            android:title="Dictionary"
+            android:icon="@drawable/ic_dictionary"
+            android:id="@+id/dictionary"
+            />
+        <item
             android:title="Members"
             android:icon="@drawable/ic_members"
             android:id="@+id/members"
@@ -12,29 +17,30 @@
             android:id="@+id/profile"
             />
         <item
-            android:title="Notification"
-            android:icon="@drawable/ic_baseline_notifications_none_24"
-            android:id="@+id/notification"
-            />
-        <item
             android:title="Change Password"
             android:icon="@drawable/ic_change_password"
             android:id="@+id/change_password"
             />
         <item
-            android:title="Share App"
-            android:icon="@drawable/ic_share_app"
-            android:id="@+id/shapre_app"
+            android:title="About Us"
+            android:icon="@drawable/ic_aboutus"
+            android:id="@+id/about_us"
             />
         <item
             android:title="Contact Us"
             android:icon="@drawable/ic_baseline_contact_us_24"
             android:id="@+id/conntact_us"
             />
+
         <item
-            android:title="Logout"
-            android:icon="@drawable/ic_logout"
-            android:id="@+id/logout"
+            android:title="Call To Admin"
+            android:icon="@drawable/ic_call"
+            android:id="@+id/call"
+            />
+        <item
+            android:title="Share App"
+            android:icon="@drawable/ic_share_app"
+            android:id="@+id/shapre_app"
             />
     </group>
 </menu>

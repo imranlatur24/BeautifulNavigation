@@ -16,15 +16,18 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.novetrics.beautifulnavigation.fragments.AboutusFragment;
 import com.novetrics.beautifulnavigation.fragments.ChangePasswordFragment;
 import com.novetrics.beautifulnavigation.fragments.ContactusFragment;
 import com.novetrics.beautifulnavigation.fragments.DashboardFragment;
+import com.novetrics.beautifulnavigation.fragments.DictionaryFragment;
 import com.novetrics.beautifulnavigation.fragments.GalleryFragment;
 import com.novetrics.beautifulnavigation.fragments.LibraryFragment;
 import com.novetrics.beautifulnavigation.fragments.MemberFragment;
@@ -56,12 +59,13 @@ public class MainActivity extends BaseActivity {
         prefManager.closeDB();
         Toast.makeText(MainActivity.this, "welcome : "+firstname, Toast.LENGTH_SHORT).show();
 
-
-
         // get the reference of FrameLayout and TabLayout
         simpleFrameLayout = (FrameLayout) findViewById(R.id.frame);
         tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
+        //title tabs
         title_tabs();
+        //toolbar menus
+
         if (savedInstanceState == null)
         {
             FragmentManager fragmentManager=getSupportFragmentManager();
@@ -90,17 +94,6 @@ public class MainActivity extends BaseActivity {
                         break;
         }
         // Logic to load the starting destination when the activity is first created.
-//        if (savedInstanceState == null)
-//        {
-//            FragmentManager fragmentManager=getSupportFragmentManager();
-//            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-//            fragmentTransaction.add(R.id.frame,new DashboardFragment()).commit();
-//        }
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.replace(R.id.frame, fragment);
-//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//        ft.commit();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -118,13 +111,16 @@ public class MainActivity extends BaseActivity {
                         fragment=new MemberFragment();
                         loadFragment(fragment);
                         break;
+                    case R.id.dictionary:
+                        fragment=new DictionaryFragment();
+                        loadFragment(fragment);
+                        break;
                     case R.id.profile:
                         fragment=new ProfileFragment();
                         loadFragment(fragment);
                         break;
-                    case R.id.notification:
-                        fragment=new NotificationFragment();
-                        loadFragment(fragment);
+                    case R.id.call:
+                        Toast.makeText(MainActivity.this, "calling to head", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.change_password:
                         fragment=new ChangePasswordFragment();
@@ -142,8 +138,9 @@ public class MainActivity extends BaseActivity {
                         fragment=new ContactusFragment();
                         loadFragment(fragment);
                         break;
-                    case R.id.logout:
-                        logout_dialog();
+                    case R.id.about_us:
+                        fragment=new AboutusFragment();
+                        loadFragment(fragment);
                         break;
                     default:
                         return true;
@@ -189,7 +186,7 @@ public class MainActivity extends BaseActivity {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogBuilder.setTitle(R.string.app_name);
-        alertDialogBuilder.setIcon(R.drawable.basket);
+        alertDialogBuilder.setIcon(R.drawable.logo);
         alertDialogBuilder.setMessage(R.string.alert_logout);
         alertDialogBuilder.setCancelable(false);
 
@@ -227,5 +224,42 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.replace(R.id.frame,fragment).commit();
         drawerLayout.closeDrawer(GravityCompat.START);
         fragmentTransaction.addToBackStack(null);
+    }
+
+    //menus
+    // Activity's overrided method used to set the menu file
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    // Activity's overrided method used to perform click events on menu items
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+// Handle action bar item clicks here. The action bar will
+// automatically handle clicks on the Home/Up button, so long
+// as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+//noinspection SimplifiableIfStatement
+// Display menu item's title by using a Toast.
+//        if (id == R.id.action_settings) {
+//            Toast.makeText(getApplicationContext(), "Setting", Toast.LENGTH_SHORT).show();
+//            return true;
+//        } else
+      if (id == R.id.action_search) {
+            Toast.makeText(getApplicationContext(), "Search", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_logout)
+        {
+            logout_dialog();
+            return true;
+        }else if (id == R.id.action_notification)
+        {
+          Fragment fragment=new NotificationFragment();
+          loadFragment(fragment);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
