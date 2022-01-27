@@ -5,14 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".fragments.LibraryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/colorPrimary"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="45dp"
-        android:text="library" />
+        tools:context="abhiandroid.com.recyclerviewexample.MainActivity">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
 </FrameLayout>

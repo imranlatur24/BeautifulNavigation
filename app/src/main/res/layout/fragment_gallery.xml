@@ -6,13 +6,26 @@
     tools:context=".fragments.GalleryFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/colorPrimary"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="45dp"
-        android:text="gallery" />
+        android:orientation="vertical">
+
+        <!-- create a ImageView and Gallery -->
+        <ImageView
+            android:id="@+id/selectedImageView"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY" />
+
+        <Gallery
+            android:id="@+id/simpleGallery"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:unselectedAlpha="0.80" />
+
+    </LinearLayout>
 
 </FrameLayout>

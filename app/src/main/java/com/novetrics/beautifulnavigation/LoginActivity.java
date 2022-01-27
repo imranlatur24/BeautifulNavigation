@@ -79,10 +79,10 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
             public void onResponse(Call<MainModel> call, Response<MainModel> response) {
                 progressDialog.dismiss();
                 try {
-                System.out.println(TAG+ "# Response "+response.body().getResp());
+                System.out.println(TAG+ "# Response "+response.body().getMessage());
 //                System.out.println(TAG+ "# empid "+response.body().getEmployee_details().get(0).getFirst_name());
                 if (200 == 200) {
-                    Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_LONG).show();
 //                    prefManager.connectDB();
 //                    prefManager.setBoolean("isLogin", true);
 //                    prefManager.setString("firstname", response.body().getEmployee_details().get(0).getFirst_name());
