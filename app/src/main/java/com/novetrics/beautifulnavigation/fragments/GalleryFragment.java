@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Gallery;
 import android.widget.ImageView;
 
-import com.novetrics.beautifulnavigation.CustomGalleryAdapter;
+import com.novetrics.beautifulnavigation.activities.CustomGalleryAdapter;
 import com.novetrics.beautifulnavigation.R;
 
 public class GalleryFragment extends Fragment {

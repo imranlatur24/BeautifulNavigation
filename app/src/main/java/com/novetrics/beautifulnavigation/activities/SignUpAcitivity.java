@@ -1,4 +1,4 @@
-package com.novetrics.beautifulnavigation;
+package com.novetrics.beautifulnavigation.activities;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -22,10 +22,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.novetrics.beautifulnavigation.R;
 import com.novetrics.beautifulnavigation.data.APIService;
 import com.novetrics.beautifulnavigation.data.APIUrl;
 import com.novetrics.beautifulnavigation.modal.MainModel;

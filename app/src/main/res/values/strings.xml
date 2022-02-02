@@ -8,4 +8,5 @@
     <string name="spinner_title">Select Sci. Type</string>
     <string name="login">Login</string>
     <string name="action_settings">settings</string>
+    <string name="change_password">Change\n Password</string>
 </resources>

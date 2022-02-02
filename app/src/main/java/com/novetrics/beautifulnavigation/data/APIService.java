@@ -21,6 +21,13 @@ public interface APIService {
             @Field("empid") String empid,
             @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("callChangePassword")
+    Call<MainModel> callChangePassword(
+            @Field("id") String empid,
+            @Field("password") String password
+    );
+
     //The login call
     @FormUrlEncoded
     @POST("user_register")

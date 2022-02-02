@@ -1,18 +1,19 @@
-package com.novetrics.beautifulnavigation;
-
-import static com.novetrics.beautifulnavigation.BaseActivity.prefManager;
+package com.novetrics.beautifulnavigation.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,8 +24,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.novetrics.beautifulnavigation.R;
 import com.novetrics.beautifulnavigation.fragments.AboutusFragment;
-import com.novetrics.beautifulnavigation.fragments.ChangePasswordFragment;
 import com.novetrics.beautifulnavigation.fragments.ContactusFragment;
 import com.novetrics.beautifulnavigation.fragments.DashboardFragment;
 import com.novetrics.beautifulnavigation.fragments.DictionaryFragment;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity {
     String firstname;
     TabLayout tabLayout;
     FrameLayout simpleFrameLayout;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class MainActivity extends BaseActivity {
         prefManager.connectDB();
         firstname = prefManager.getString("firstname");
         prefManager.closeDB();
+
         Toast.makeText(MainActivity.this, "welcome : "+firstname, Toast.LENGTH_SHORT).show();
 
         // get the reference of FrameLayout and TabLayout
@@ -96,8 +99,6 @@ public class MainActivity extends BaseActivity {
         // Logic to load the starting destination when the activity is first created.
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
         navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -123,8 +124,7 @@ public class MainActivity extends BaseActivity {
                         Toast.makeText(MainActivity.this, "calling to head", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.change_password:
-                        fragment=new ChangePasswordFragment();
-                        loadFragment(fragment);
+                        startActivity(new Intent(MainActivity.this, ChangePassword.class));
                         break;
                     case R.id.shapre_app:
                         Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
@@ -164,7 +164,7 @@ public class MainActivity extends BaseActivity {
     private void title_tabs() {
         // Create a new Tab named "First"
         TabLayout.Tab firstTab = tabLayout.newTab();
-        firstTab.setText("HOme"); // set the Text for the first Tab
+        firstTab.setText("Home"); // set the Text for the first Tab
         firstTab.setIcon(R.drawable.ic_baseline_home_24); // set an icon for the
 // first tab
         tabLayout.addTab(firstTab); // add  the tab at in the TabLayout
@@ -182,7 +182,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void logout_dialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
+        builder = new AlertDialog.Builder(MainActivity.this, R.style.MyDialogTheme);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogBuilder.setTitle(R.string.app_name);
@@ -256,8 +256,22 @@ public class MainActivity extends BaseActivity {
             return true;
         }else if (id == R.id.action_notification)
         {
-          Fragment fragment=new NotificationFragment();
-          loadFragment(fragment);
+//          Fragment fragment=new NotificationFragment();
+//          loadFragment(fragment);
+            System.out.println("noti clicked");
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(MainActivity.this)
+                            .setSmallIcon(R.drawable.birthday)
+                            .setContentTitle("Birthday Alert")
+                            .setContentText("Greetings! Panday Sir Birthday");
+//                        .setAutoCancel(true);
+            Intent notificationIntent = new Intent(this, NotificationActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, notificationIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(pendingIntent);
+
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.notify(0, builder.build());
             return true;
         }
         return super.onOptionsItemSelected(item);

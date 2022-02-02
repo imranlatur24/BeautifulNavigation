@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.novetrics.beautifulnavigation.R;
-import com.novetrics.beautifulnavigation.modal.Adapter_Library;
+import com.novetrics.beautifulnavigation.adapters.Adapter_Library;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,8 @@ import java.util.Arrays;
 
 public class LibraryFragment extends Fragment {
     View view;
-    // ArrayList for person names
+
+
     ArrayList personNames = new ArrayList<>(Arrays.asList("Person 1", "Person 2", "Person 3"));
     ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.bird1, R.drawable.bird2, R.drawable.bird3));
     Adapter_Library customAdapter;

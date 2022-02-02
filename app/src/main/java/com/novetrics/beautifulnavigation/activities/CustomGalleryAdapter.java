@@ -1,4 +1,4 @@
-package com.novetrics.beautifulnavigation;
+package com.novetrics.beautifulnavigation.activities;
 
 import android.content.Context;
 import android.view.View;

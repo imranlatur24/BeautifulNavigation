@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".SignUpAcitivity">
+    tools:context=".activities.SignUpAcitivity">
 
     <View
         android:id="@+id/header_view"

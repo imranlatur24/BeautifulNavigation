@@ -6,13 +6,11 @@
     tools:context=".fragments.NotificationFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/colorPrimary"
+    <Button
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="45dp"
-        android:text="notifications" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Notification"
+        android:id="@+id/button" />
 
 </FrameLayout>
