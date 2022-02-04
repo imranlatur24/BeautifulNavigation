@@ -3,16 +3,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.DashboardFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/colorPrimary"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="45dp"
-        android:text="dashboard" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="0.7"
+            android:paddingTop="5dp"
+            android:layout_marginLeft="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin Panel"
+            android:textSize="14dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textColor="@color/colorPrimary"/>
+        <View
+            android:layout_marginTop="15dp"
+            android:layout_weight="0.3"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/colorPrimary" />
+    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/recyclerView_horizontal_menus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="0.7"
+                android:paddingTop="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Latest Updates"
+                android:textSize="14dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textColor="@color/colorPrimary"/>
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_weight="0.3"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/colorPrimary" />
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="2dp"
+            app:cardUseCompatPadding="true"
+            app:cardMaxElevation="4dp">
 
+            <WebView
+                android:padding="3dp"
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </FrameLayout>

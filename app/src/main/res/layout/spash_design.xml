@@ -10,8 +10,8 @@
         android:orientation="vertical"
         android:gravity="center">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="196dp"
+            android:layout_height="196dp"
             android:layout_gravity="center"
             android:src="@drawable/logo"/>
         <TextView
@@ -22,7 +22,7 @@
             android:textColor="@color/colorPrimary"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="36dp"
-            android:gravity="center"/>
+            android:gravity="center|bottom"/>
         <TextView
             android:textColor="@color/black"
             android:layout_gravity="bottom"

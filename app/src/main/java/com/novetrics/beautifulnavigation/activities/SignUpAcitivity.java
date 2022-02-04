@@ -6,9 +6,11 @@ import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ import com.novetrics.beautifulnavigation.data.APIUrl;
 import com.novetrics.beautifulnavigation.modal.MainModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -44,9 +48,12 @@ public class SignUpAcitivity extends BaseActivity  implements View.OnClickListen
     EditText edt_firstname,edt_lastname,edt_email,edt_password,edt_cpassword;
     String item;
     private static final String TAG = "SignUpAcitivity";
-    private String stFirstName,stLastName,stEmail,stPassword,stCPassword,stSpinner;
+    private String stFirstName,stLastName,stEmail,stPassword,stCPassword,stSpinner,stDate;
     private APIService apiService;
     List<String> categories;
+    EditText date;
+    DatePickerDialog datePickerDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +74,33 @@ public class SignUpAcitivity extends BaseActivity  implements View.OnClickListen
         edt_password = findViewById(R.id.edt_password);
         edt_cpassword = findViewById(R.id.edt_cpassword);
         textview_back_tologin = findViewById(R.id.textview_back_tologin);
+        // initiate the date picker and a button
+        date = (EditText) findViewById(R.id.date);
+        // perform click event on edit text
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(SignUpAcitivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                date.setText(dayOfMonth + "/"
+                                        + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
         // Spinner element
         spinner = (Spinner) findViewById(R.id.spinner);
         // Spinner click listener
@@ -100,8 +134,13 @@ public class SignUpAcitivity extends BaseActivity  implements View.OnClickListen
                 stPassword = edt_password.getText().toString().trim();
                 stCPassword = edt_cpassword.getText().toString().trim();
                 stSpinner =  item;
+                stDate = date.getText().toString().trim();
                 if (!isNetworkAvailable()) {
                     Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(stDate)) {
+                    Toast.makeText(this, "select your birthdate ", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(stFirstName)) {
@@ -141,10 +180,11 @@ public class SignUpAcitivity extends BaseActivity  implements View.OnClickListen
                     return;
                 }
                 if(!stPassword.equals(stCPassword)){
-                    Toast.makeText(this, "Password and confirm password do not match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "password and confirm password does not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                signup(stFirstName,stLastName,stEmail,stSpinner,stPassword,stCPassword);
+
+                signup(stDate,stFirstName,stLastName,stEmail,stSpinner,stPassword,stCPassword);
                 break;
 
             case R.id.textview_back_tologin:
@@ -153,7 +193,7 @@ public class SignUpAcitivity extends BaseActivity  implements View.OnClickListen
         }
     }
     //api calling
-    private void signup(final String stFirstName,final String stLastName,final String stEmail,
+    private void signup(final String stDate,final String stFirstName,final String stLastName,final String stEmail,
                         final String stSpinner,
                         final String stPassword,final String stCPassword) {
         //defining a progress dialog to show while signing up
@@ -163,7 +203,7 @@ public class SignUpAcitivity extends BaseActivity  implements View.OnClickListen
         progressDialog.setCancelable(false);
 
         //calling the api
-        callSignup(stFirstName,stLastName,stEmail,stSpinner,stPassword,stCPassword).enqueue(new Callback<MainModel>() {
+        callSignup(stDate,stFirstName,stLastName,stEmail,stSpinner,stPassword,stCPassword).enqueue(new Callback<MainModel>() {
             @Override
             public void onResponse(Call<MainModel> call, Response<MainModel> response) {
                 progressDialog.dismiss();
@@ -184,8 +224,7 @@ public class SignUpAcitivity extends BaseActivity  implements View.OnClickListen
                     }
                 }catch (NullPointerException e){
                     System.out.println(TAG+ " Response "+e.getMessage());
-                    Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(SignUpAcitivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -197,12 +236,13 @@ public class SignUpAcitivity extends BaseActivity  implements View.OnClickListen
             }
         });
     }
-    private Call<MainModel> callSignup(final String stFirstName,final String stLastName,final String stEmail,
+    private Call<MainModel> callSignup(final String stDate,final String stFirstName,final String stLastName,final String stEmail,
                                        final String stSpinner,
                                        final String stPassword,final String stCPassword) {
-        System.out.println("# callSingup: firstname " +stFirstName+" lastname : "+stLastName+" email "+stEmail
+        System.out.println("# callSingup: birth_date " +stDate+" firstname " +stFirstName+" lastname : "+stLastName+" email "+stEmail
         +" password "+stPassword+" cpass "+stCPassword+ " email "+stSpinner);
         return apiService.callSignup(
+                stDate,
                 stFirstName,
                 stLastName,
                 stEmail,

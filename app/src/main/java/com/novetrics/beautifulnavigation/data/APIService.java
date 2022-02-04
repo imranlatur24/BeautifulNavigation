@@ -32,6 +32,7 @@ public interface APIService {
     @FormUrlEncoded
     @POST("user_register")
     Call<MainModel> callSignup(
+            @Field("birth_date") String birth_date,
             @Field("first_name") String first_name,
             @Field("last_name") String last_name,
             @Field("empid") String empid,

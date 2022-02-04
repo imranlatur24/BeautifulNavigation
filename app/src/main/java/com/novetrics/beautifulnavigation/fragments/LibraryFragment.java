@@ -21,8 +21,6 @@ public class LibraryFragment extends Fragment {
     View view;
 
 
-    ArrayList personNames = new ArrayList<>(Arrays.asList("Person 1", "Person 2", "Person 3"));
-    ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.bird1, R.drawable.bird2, R.drawable.bird3));
     Adapter_Library customAdapter;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
@@ -38,8 +36,10 @@ public class LibraryFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_library, container, false);
         // get the reference of RecyclerView
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        // set a LinearLayoutManager with default HORIZONTAL orientation
+//        linearLayoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL, false);
         // set a LinearLayoutManager with default vertical orientation
-        linearLayoutManager = new LinearLayoutManager(view.getContext());
+        linearLayoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         // call the constructor of CustomAdapter to send the reference and data to Adapter
         customAdapter = new Adapter_Library();

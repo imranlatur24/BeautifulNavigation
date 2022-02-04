@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    app:cardBackgroundColor="@color/colorWhite"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
-
+        android:background="@color/colorWhite"
         android:layout_margin="50px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/date"
+            android:editable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimary"
+            android:hint="Select Birthdate..."
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/edt_firstname"
             android:layout_width="match_parent"
@@ -70,8 +85,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:prompt="@string/spinner_title"/>
+
         </LinearLayout>
         <Button
+            android:padding="10dp"
             android:id="@+id/btnsignup"
             android:textAllCaps="false"
             android:layout_marginTop="10dp"
