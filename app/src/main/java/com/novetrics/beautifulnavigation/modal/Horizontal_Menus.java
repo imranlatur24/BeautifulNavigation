@@ -5,7 +5,7 @@ public class Horizontal_Menus {
     public  static String[] menus=new String[]{
             "Add \nMember",
             "Update \nLibrary",
-            "Gallery",
+            "Update \nGallery",
             "Send \nNotification",
             "Upload \nReport"
     };

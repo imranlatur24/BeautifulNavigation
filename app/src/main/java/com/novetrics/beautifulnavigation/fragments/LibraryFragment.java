@@ -19,8 +19,6 @@ import java.util.Arrays;
 
 public class LibraryFragment extends Fragment {
     View view;
-
-
     Adapter_Library customAdapter;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;

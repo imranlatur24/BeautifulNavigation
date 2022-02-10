@@ -9,4 +9,11 @@
     <string name="login">Login</string>
     <string name="action_settings">settings</string>
     <string name="change_password">Change\n Password</string>
+    <string name="profile">Profile</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="firstname">First Name</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="lastname">Lastname</string>
+    <string name="update_profile">Update Profile</string>
 </resources>

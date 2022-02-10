@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity {
         firstname = prefManager.getString("firstname");
         prefManager.closeDB();
 
-        Toast.makeText(MainActivity.this, "welcome : "+firstname, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MainActivity.this, "welcome : "+firstname, Toast.LENGTH_SHORT).show();
 
         // get the reference of FrameLayout and TabLayout
         simpleFrameLayout = (FrameLayout) findViewById(R.id.frame);
