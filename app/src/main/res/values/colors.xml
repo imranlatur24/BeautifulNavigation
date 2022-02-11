@@ -9,6 +9,7 @@
     <color name="textColorPrimary">#212121</color>
     <color name="textColor">#000000</color>
     <color name="textColorSecondary">#757575</color>
+    <color name="textColorSecondary2">#A8A0A0</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="purple_200">#FFBB86FC</color>
