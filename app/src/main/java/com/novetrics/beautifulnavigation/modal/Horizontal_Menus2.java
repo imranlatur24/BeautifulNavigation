@@ -9,14 +9,20 @@ public class Horizontal_Menus2 {
             "Change \nPassword",
             "About \nus",
             "Contact \nus",
+            "Call To \nAdmin",
+            "Gallery",
+            "Libaray",
     };
 
     public static  int[] logopath = new int[]{
-            R.drawable.ic_dictionary,
-            R.drawable.ic_members,
-            R.drawable.ic_profile,
-            R.drawable.ic_change_password,
-            R.drawable.ic_aboutus,
-            R.drawable.ic_baseline_contact_us_24,
+            R.drawable.dict_2,
+            R.drawable.members_2,
+            R.drawable.profile_2,
+            R.drawable.changepassword_2,
+            R.drawable.about_us2,
+            R.drawable.contact_us_2,
+            R.drawable.call2,
+            R.drawable.gallery2,
+            R.drawable.library_2,
     };
 }

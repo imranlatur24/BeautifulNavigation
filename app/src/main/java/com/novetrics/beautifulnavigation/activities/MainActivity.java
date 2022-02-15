@@ -247,8 +247,11 @@ public class MainActivity extends BaseActivity {
 //            Toast.makeText(getApplicationContext(), "Setting", Toast.LENGTH_SHORT).show();
 //            return true;
 //        } else
-      if (id == R.id.action_search) {
-            Toast.makeText(getApplicationContext(), "Search", Toast.LENGTH_SHORT).show();
+      if (id == R.id.home)
+      {
+          Fragment fragment=null;
+          fragment=new DashboardFragment();
+          loadFragment(fragment);
             return true;
         } else if (id == R.id.action_logout)
         {
