@@ -57,6 +57,7 @@ public class DashboardFragment extends Fragment {
         webView.getSettings().setDomStorageEnabled(true);
         // specify the url of the web page in loadUrl function
         webView.loadUrl("http://192.168.0.105:8000/");
+//        webView.loadUrl("http://192.168.0.105/s(lider_ex/");
 
         //topmenu gif
         recyclerView_horizontal_menus = (RecyclerView) view.findViewById(R.id.recyclerView_horizontal_menus);
